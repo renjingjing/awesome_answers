@@ -1,0 +1,6 @@
+// alert("hey");
+// console.log("whatever");
+$(".answers").prepend("<%= j render 'answer', ans: @answer %>");
+// $('#comment_body').val("");
+<% @answer = Answer.new %>
+$("#new_answer").replaceWith("<%= j render 'form' %>");

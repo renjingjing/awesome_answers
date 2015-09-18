@@ -15,3 +15,8 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+$.get("http://localhost:2000/questions.json",function(questions){
+  for(var i=0;i<questions.length;i++){
+    console.log(questions[i].title);
+  }
+});

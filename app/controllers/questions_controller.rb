@@ -38,7 +38,12 @@ class QuestionsController < ApplicationController
   # GET /questions/:id (e.g. /questions/1)
   # this is used to show a page with question information
   def show
-    @answer = Answer.new
+    respond_to do |format|
+      @answer = Answer.new
+      format.json {render json: {question:@questions,answers:@question.answers}}
+      format.html {render}
+      format.xml {render xml: @questions}
+    end
   end
 
   # GET /questions
@@ -48,6 +53,11 @@ class QuestionsController < ApplicationController
       @questions = Question.search(params[:search]).order("#{params[:order]}").page(params[:page]).per(PER_PAGE)
     else
       @questions = Question.order("#{params[:order]}").page(params[:page]).per(PER_PAGE)
+    end
+    # for jq ajax
+    respond_to do |format|
+      format.json {render json: @questions}
+      format.html {render}
     end
     # @question = Question.new
   end
